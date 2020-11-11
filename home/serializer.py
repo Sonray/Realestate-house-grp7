@@ -6,5 +6,5 @@ from .models import Review
 class RevSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('_all_')
+        fields = '__all__'
 
