@@ -1,16 +1,15 @@
-from __future__ import unicode_literals
 from django.db import models
 from pyuploadcare.dj.models import ImageField
-from django.db import models
+# from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from PIL import Image
-from django.dispatch import receiver
-from django.urls import reverse
-from django_rest_passwordreset.signals import reset_password_token_created
-from django.core.mail import send_mail
-from pyuploadcare.dj.models import ImageField
-from pyuploadcare.dj.forms import FileWidget
+# from django.db.models.signals import post_save
+# from PIL import Image
+# from django.dispatch import receiver
+# from django.urls import reverse
+# from django_rest_passwordreset.signals import reset_password_token_created
+# from django.core.mail import send_mail
+# from pyuploadcare.dj.models import ImageField
+# from pyuploadcare.dj.forms import FileWidget
 # Create your models here.
 
 #Profile
