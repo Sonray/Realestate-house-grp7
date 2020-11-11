@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 # Create your models here.
 
@@ -9,10 +10,18 @@ class User(AbstractUser):
         A_user = "USER", "User"
         Realtor = "REALTOR", "Realtor"
 
+
+    email = models.EmailField(max_length=50, blank=False, unique=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    password = models.CharField(max_length=280, blank=False)
     type = models.CharField('Type', max_length=30, choices=User_Type.choices, default=User_Type.A_user)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 class A_userManager(models.Manager):
+
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.User_Type.A_user)
 
