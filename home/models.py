@@ -14,3 +14,4 @@ class House(models.Model):
     category=models.CharField(max_length=300)
     user=models.ForeingKey(User, on_delete=models.CASCADE, related_name="houses")
     location=models.CharField(max_length=300)
+    date_added = models.DateTimeField(auto_now_add = True, null =True)
