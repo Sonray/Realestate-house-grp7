@@ -14,3 +14,9 @@ class House(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="houses")
     location=models.CharField(max_length=300)
     date_added = models.DateTimeField(auto_now_add = True, null =True)
+
+    def save_house(self):
+        self.save()
+
+    def delete_house(self):
+        self.delete()
