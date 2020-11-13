@@ -3,12 +3,12 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 from . import views
 from django.urls import path, include
-from .views import UserProfile
+from .views import UserProfileList
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 
-    path('users/<user_id>/profile/', UserProfile,)
+    path('api/profile/', views.UserProfileList.as_view()),
 
 
 ]
