@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import HouseSerializer
+from .serializer import HouseSerializer
 from .models import House
 from rest_framework.response import Response
 from rest_framework.views import APIView
