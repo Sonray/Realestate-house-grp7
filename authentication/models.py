@@ -14,7 +14,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=280, blank=False, unique=True)
     email = models.EmailField(max_length=50, blank=False, unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    password = models.CharField(max_length=280, blank=False)
+    password = models.CharField( max_length=280, blank=False, )
     type = models.CharField('Type', max_length=30, choices=User_Type.choices, default=User_Type.A_user)
 
     USERNAME_FIELD = 'username'

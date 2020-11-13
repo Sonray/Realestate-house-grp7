@@ -6,37 +6,39 @@ from .permissions import IsAdminOrReadOnly
 from .models import User
 from .serializer import RegisterSerializer, LoginSerializer
 from rest_framework import status
+from rest_framework_simplejwt.tokens import AccessToken
 
 # Create your views here.
-class User_request(APIView):
+class User_Register(APIView):
         
     def get_user(self, pk):
         try:
-            return Products.objects.get(pk=pk)
+            return User.objects.get(pk=pk)
         except Post.DoesNotExist:
             return Http404
 
     def get(self,request, pk, format=None):
         the_user = self.get_user(pk)
-        serializers = ProductSerializer(the_user)
         return Response(serializers.data)
 
     def post(self, request, format=None):
-        permission_classes = (IsAdminOrReadOnly,)
-        serializers = ProductSerializer(data=request.data)
+
+        serializers = RegisterSerializer(data=request.data)
 
         if serializers.is_valid():
 
             serializers.save()
 
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
+            return Response(
+                serializers.data, status=status.HTTP_201_CREATED
+                )
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         merch = self.get_user(pk)
-        serializers = ProductSerializer(merch, request.data)
+        serializers = RegisterSerializer(merch, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
@@ -48,3 +50,14 @@ class User_request(APIView):
         merch = self.get_user(pk)
         merch.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class User_Login(APIView):
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return Http404
+
+    def get(self,request, pk, format=None):
+        the_user = self.get_user(pk)
+        return Response(serializers.data)
