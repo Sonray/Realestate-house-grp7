@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
+from . serializer import RevSerializer
+from .models import Review
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 # Create your views here.
 
 
@@ -24,3 +26,9 @@ class Review (APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, pk, format=None):
+        Review = self.get_user(pk)
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

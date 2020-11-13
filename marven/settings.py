@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
 from decouple import config,Csv
 
@@ -152,11 +152,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-cloudinary.config (
-    cloud_name = config('CLOUD_NAME'),
-    api_key = config('CLOUD_API_KEY'),
-    api_secret = config('CLOUD_API_SECRET'),
-)
+# cloudinary.config (
+#     cloud_name = config('CLOUD_NAME'),
+#     api_key = config('CLOUD_API_KEY'),
+#     api_secret = config('CLOUD_API_SECRET'),
+# )
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
