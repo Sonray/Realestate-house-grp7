@@ -6,7 +6,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 
-    url(r'^api/register/$', views.User_Register.as_view()),
+    url(r'/register/', views.User_Register.as_view()),
     url(r'^api/login/(?P<pk>[0-9]+)/$', views.User_Login.as_view()),
     url(r'^api/delete_user/(?P<pk>[0-9]+)/$', views.User_Register.as_view()),
 
