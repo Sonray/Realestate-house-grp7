@@ -9,17 +9,13 @@ class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=50)
     date_joined = serializers.DateTimeField(default=timezone.now)
     type = serializers.ChoiceField(choices = ['Realtor', 'A_User'])
-    password = serializers.CharField( max_length=280)
+    password = serializers.CharField( max_length=280, write_only=True)
 
-    def __str__(self):
-        return f'username'
 
     class Meta:
         model = User
         fields = ['username', 'email', 'type', 'password' ]
-        extra_kwargs = {
-            'password':{'write_only':True}
-        }
+    
     
     def validate(self, attrs):
         email = attrs.get('email', '')

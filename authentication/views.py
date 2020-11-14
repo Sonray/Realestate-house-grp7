@@ -19,6 +19,7 @@ class User_Register(APIView):
 
     def get(self,request, pk, format=None):
         the_user = self.get_user(pk)
+        serializers = RegisterSerializer(the_user)
         return Response(serializers.data)
 
     def post(self, request, format=None):
