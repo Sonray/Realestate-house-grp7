@@ -127,10 +127,13 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'authentication.backend.JWTAuthentication'
 
     )
     # 'USER_DETAILS_SERIALIZER':''
 }
+
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

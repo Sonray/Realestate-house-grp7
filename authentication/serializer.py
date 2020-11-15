@@ -29,12 +29,15 @@ class RegisterSerializer(serializers.Serializer):
         return user
 
 class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField(required=True)
+    username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
+    token = serializers.CharField(allow_blank=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('email', 'password',)
+        fields = ['email', 'password', 'token',]
         extra_kwargs = {
             'password':{'write_only':True}
         }
+    def validate(self, data):
+        return data
