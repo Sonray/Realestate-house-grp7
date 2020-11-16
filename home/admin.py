@@ -6,3 +6,6 @@ from .models import Review,House,Inquiry
 admin.site.register(Review)
 admin.site.register(House)
 admin.site.register(Inquiry)
+from .models import *
+
+admin.site.register(UserProfile)

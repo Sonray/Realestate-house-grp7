@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .serializer import HouseSerializer
 from .models import House
+from .serializer import ProfileSerializer
+from .models import UserProfile
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -101,3 +103,10 @@ class Review (APIView):
 class InquiryViewSet(viewsets.ModelViewSet):
     queryset = Inquiry.objects.all()
     serializer_class = InquirySerializer
+
+# Profile views
+class UserProfileList(APIView):
+     def get(self, request, format=None):
+        all_profile = UserProfile.objects.all()
+        serializers=ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)

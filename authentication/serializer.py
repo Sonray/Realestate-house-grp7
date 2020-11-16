@@ -41,3 +41,4 @@ class LoginSerializer(serializers.Serializer):
         }
     def validate(self, data):
         return data
+
