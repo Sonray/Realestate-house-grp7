@@ -18,7 +18,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-<<<<<<< HEAD
             name='House',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -29,7 +28,6 @@ class Migration(migrations.Migration):
                 ('location', models.CharField(max_length=300)),
                 ('date_added', models.DateTimeField(auto_now_add=True, null=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='houses', to=settings.AUTH_USER_MODEL)),
-=======
             name='Inquiry',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -38,7 +36,6 @@ class Migration(migrations.Migration):
                 ('contact', models.EmailField(blank=True, max_length=100)),
                 ('message', models.TextField(blank=True, max_length=255)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='inquire', to=settings.AUTH_USER_MODEL)),
->>>>>>> d447a026109baa8d9be382b1eaa319c9649ccc67
             ],
         ),
     ]
