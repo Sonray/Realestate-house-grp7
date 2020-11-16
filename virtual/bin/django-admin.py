@@ -1,4 +1,4 @@
-#!/home/moringa/Desktop/b/Realestate-house-grp7/virtual/bin/python
+#!/home/daisy/Desktop/Realestate-house-grp7/Realestate-house-grp7/virtual/bin/python
 from django.core import management
 
 if __name__ == "__main__":
