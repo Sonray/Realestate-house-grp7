@@ -11,6 +11,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 # Create your views here
+from rest_framework import viewsets
+from .models import Inquiry
+from .serializers import InquirySerializer
 
 
 # Create your views here.
@@ -95,3 +98,6 @@ class Review (APIView):
         Review = self.get_user(pk)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+class InquiryViewSet(viewsets.ModelViewSet):
+    queryset = Inquiry.objects.all()
+    serializer_class = InquirySerializer

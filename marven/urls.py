@@ -18,7 +18,10 @@ from django.contrib import admin
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 # from rest_framework.authtoken.views import obtain_auth_token
 
-urlpatterns = [
+from django.contrib import admin
+from django.urls import path, include
+#from django.conf import settings
+#from django.conf.urls.static import static
 
     url('admin/', admin.site.urls),
     url(r'',include('home.urls')),
@@ -27,4 +30,7 @@ urlpatterns = [
     url(r'api/token/refresh/', TokenRefreshView.as_view()),
 
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('home.urls'))
 ]
