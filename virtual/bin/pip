@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/home/daisy/Desktop/Realestate-house-grp7/Realestate-house-grp7/virtual/bin/python
+=======
+#!/home/moringa/Desktop/b/Realestate-house-grp7/virtual/bin/python
+>>>>>>> main
 # -*- coding: utf-8 -*-
 import re
 import sys

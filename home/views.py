@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from .serializer import HouseSerializer
-from .models import House
+from .serializer import HouseSerializer,RevSerializer
+from .models import House,Review
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
+from .permissions import IsAdminOrReadOnly
+
 
 
 # Create your views here.
@@ -24,6 +26,9 @@ class HouseList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class HouseDetail(APIView):
+
+    permission_classes = (IsAdminOrReadOnly,)
+
 
     def get_object(self,pk):
         '''
@@ -59,4 +64,34 @@ class HouseDetail(APIView):
     def delete(self, request, pk, format=None):
         house = self.get_object(pk)
         house.delete()
+
+
+
+class Review (APIView):
+
+    permission_classes = (IsAdminOrReadOnly,)
+
+
+    permission_classes = (IsAdminOrReadOnly,)
+    
+    def get(self, request, format=None):
+        all_post = Review.objects.all()
+        serializers = RevSerializer(all_post, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = RevSerializer(data=request.data)
+
+        if serializers.is_valid():
+
+            serializers.save()
+
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, pk, format=None):
+        review = self.get_user(pk)
+        review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
