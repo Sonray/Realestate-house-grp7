@@ -1,11 +1,16 @@
-<<<<<<< HEAD
 from django.shortcuts import render
-from .serializers import HouseSerializer
+from .serializer import HouseSerializer
 from .models import House
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
+from . serializer import RevSerializer
+from .models import Review
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+# Create your views here
 
 
 # Create your views here.
@@ -61,13 +66,7 @@ class HouseDetail(APIView):
         house = self.get_object(pk)
         house.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-=======
-from . serializer import RevSerializer
-from .models import Review
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-# Create your views here.
+
 
 
 
@@ -96,4 +95,3 @@ class Review (APIView):
         Review = self.get_user(pk)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
->>>>>>> 08c33c54434eab40017cda985d4cb93c8b0357b5

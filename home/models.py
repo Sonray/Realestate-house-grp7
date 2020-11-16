@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 
@@ -16,7 +15,6 @@ class House(models.Model):
     user=models.ForeingKey(User, on_delete=models.CASCADE, related_name="houses")
     location=models.CharField(max_length=300)
     date_added = models.DateTimeField(auto_now_add = True, null =True)
-=======
 from django.contrib.auth.models import User
 
 
@@ -35,4 +33,3 @@ class Review(models.Model):
     def __str__(self):
         return self.review
 
->>>>>>> 08c33c54434eab40017cda985d4cb93c8b0357b5

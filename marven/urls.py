@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-<<<<<<< HEAD
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-=======
 # from rest_framework.authtoken.views import obtain_auth_token
->>>>>>> 08c33c54434eab40017cda985d4cb93c8b0357b5
 
 urlpatterns = [
 
@@ -28,5 +25,6 @@ urlpatterns = [
     url(r'',include('authentication.urls')),
     url(r'api/token/', TokenObtainPairView.as_view()),
     url(r'api/token/refresh/', TokenRefreshView.as_view()),
+
 
 ]
