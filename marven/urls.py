@@ -22,6 +22,6 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'',include('home.urls')),
     url(r'',include('authentication.urls')),
-    url(r'^api-token-auth/', obtain_auth_token),
+    # url(r'^api-token-auth/', obtain_auth_token),
 
 ]
