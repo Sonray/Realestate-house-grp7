@@ -7,7 +7,8 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
 
         # url(r'^review/(?P<user_id>\d+)', views.Review.as_view()),
-        url(r'^api/review/(?P<pk>[0-9]+)/', views.Review.as_view()),
+        # url(r'^api/review/(?P<pk>[0-9]+)/', views.Review.as_view()),
+        url(r'^api/review/$', views.RevList.as_view()),
        
         
     
