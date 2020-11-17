@@ -1,21 +1,27 @@
-from . serializer import RevSerializer
-from .models import Review
+from .serializer import RevSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from . permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly
+from .models import Review
 # Create your views here.
 
 
 
 class Review (APIView):
+    
+    def get_user(self, pk):
+        try:
+            return  Review.objects.get(pk=pk)
+        except Review.DoesNotExist:
+            return Http404
 
     permission_classes = (IsAdminOrReadOnly,)
-    
-    def get(self, request, format=None):
-        all_post = Review.objects.all()
-        serializers = ReviewSerializer(all_post, many=True)
-        return Response(serializers.data)
+        
+    def get(self,request, pk, format=None):
+        the_user = self.get_user(pk)
+        serializers =  ReviewSerializer(the_user)
+        return Response(serializers.data) 
 
     def post(self, request, format=None):
         serializers = ReviewSerializer(data=request.data)
