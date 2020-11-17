@@ -58,32 +58,6 @@ class User_Register(APIView):
 
 
 class User_Login(APIView):
-    # def get_user(self, pk):
-    #     try:
-    #         return User.objects.get(pk=pk)
-    #     except Post.DoesNotExist:
-    #         return Http404
-
-    # def get(self,request, pk, format=None):
-    #     the_user = self.get_user(pk)
-    #     return Response(serializers.data)
-
-    # def post(self, request):
-    #     data = request.data
-    #     username = data.get('username', '')
-    #     password = data.get('password', '')
-
-    #     user = auth.authenticate(username=username, password=password, )
-
-    #     if user:
-    #         auth_token = jwt.encode({'username':user.username, 'password':user.password}, settings.JWT_SECRET_KEY,)
-
-    #         serializer = LoginSerializer(user)
-
-    #         data  = { 'user':serializer.data, 'token':auth_token }
-    #         return Response( data, status=status.HTTP_200_OK )
-
-    #     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, *args, **kwargs):
         data = request.data

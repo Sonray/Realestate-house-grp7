@@ -15,39 +15,7 @@ import os
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
-
-MODE=config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-# development
-if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-       
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,11 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = 'qnipw0dm2m6!o6#8g*v)6apk5-08t#*(x-3u5z!+3l$@8xf_eh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [ ]
 
 AUTH_USER_MODEL = 'authentication.User'
 
@@ -73,14 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'cloudinary_storage',
-    'cloudinary',
-    'bootstrap3',
     'home',
     'authentication',
-    'rest_framework',
-    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -119,30 +81,24 @@ WSGI_APPLICATION = 'marven.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # development
-# if config('MODE')=="prod":
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': config('DB_NAME'),
-#            'USER': config('DB_USER'),
-#            'PASSWORD': config('DB_PASSWORD'),
-#            'HOST': config('DB_HOST'),
-#            'PORT': '',
-#        }
-#    }
-# # production
-# else:
-#    DATABASES = {
-#        'default': dj_database_url.config(
-#            default=config('DATABASE_URL')
-#        )
-#    }
-
-cloudinary.config (
-    cloud_name = config('CLOUD_NAME'),
-    api_key = config('CLOUD_API_KEY'),
-    api_secret = config('CLOUD_API_SECRET'),
-)
+if config('MODE')=="prod":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
 
 
 # Password validation
@@ -165,13 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'authentication.User'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.TokenAuthentication',
 
-    )
-    # 'USER_DETAILS_SERIALIZER':''
-}
 
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
@@ -180,7 +130,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'authentication.backend.JWTAuthentication',
     ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
 # Internationalization
@@ -195,12 +145,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
-}
 
 
 # Static files (CSS, JavaScript, Images)
@@ -220,12 +164,6 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-# cloudinary.config (
-#     cloud_name = config('CLOUD_NAME'),
-#     api_key = config('CLOUD_API_KEY'),
-#     api_secret = config('CLOUD_API_SECRET'),
-# )
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())

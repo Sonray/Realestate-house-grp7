@@ -16,14 +16,6 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-# from rest_framework.authtoken.views import obtain_auth_token
-
-from django.contrib import admin
-from django.urls import path, include
-#from django.conf import settings
-#from django.conf.urls.static import static
-
-
 
 urlpatterns = [
     url('admin/', admin.site.urls),
