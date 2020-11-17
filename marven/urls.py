@@ -23,14 +23,12 @@ from django.urls import path, include
 #from django.conf import settings
 #from django.conf.urls.static import static
 
+
+
+urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'',include('home.urls')),
     url(r'',include('authentication.urls')),
     url(r'api/token/', TokenObtainPairView.as_view()),
     url(r'api/token/refresh/', TokenRefreshView.as_view()),
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('home.urls'))
 ]

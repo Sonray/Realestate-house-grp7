@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#!/home/daisy/Desktop/Realestate-house-grp7/Realestate-house-grp7/virtual/bin/python
-=======
-#!/home/moringa/Desktop/moringa-school-projects/Realestate-house-grp7/virtual/bin/python3
->>>>>>> dd0a1cd275881e27a4f4c3ed60cf8e353476e8fb
+#!/home/moringa/Sonray/moringa-school-projects/python/Django/House/virtual/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

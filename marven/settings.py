@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-# import django_heroku
+import django_heroku
 import dj_database_url
 from decouple import config,Csv
 import cloudinary
@@ -168,19 +168,17 @@ AUTH_USER_MODEL = 'authentication.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'authentication.backend.JWTAuthentication',
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
 
     )
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
     # 'USER_DETAILS_SERIALIZER':''
 }
 
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'authentication.backend.JWTAuthentication',
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
 }
@@ -230,6 +228,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # )
 
 # Configure Django App for Heroku.
-# django_heroku.settings(locals())
 django_heroku.settings(locals())
 
