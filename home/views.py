@@ -10,7 +10,7 @@ from .models import Review
 
 
 class RevList(APIView):
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):
         all_merchrev = Review.objects.all()
