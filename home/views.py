@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from .serializer import ProfileSerializer, RevSerializer
 from .models import UserProfile, Review 
 from rest_framework.response import Response
@@ -17,12 +18,76 @@ class UserProfileList(APIView):
 
 
 from .serializer import RevSerializer
+=======
+from django.shortcuts import render
+from .serializer import HouseSerializer,RevSerializer
+from .models import House,Review
+>>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
-from .permissions import IsAdminOrReadOnly
-from .models import Review
+from rest_framework import status,permissions
+from django.http import Http404
+from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
+
+
+
 # Create your views here.
+
+class HouseList(APIView):
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get(self, request, format=None):
+        all_houses = House.objects.all()
+        serializers=HouseSerializer(all_houses, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = HouseSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class HouseDetail(APIView):
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def get_object(self,pk):
+        '''
+        retrieve house object from database
+        '''
+
+        try:
+            return House.objects.get(pk=pk)
+        except House.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        '''
+        get a single house object with its details
+        '''
+
+        house=self.get_object(pk)
+        serializer=HouseSerializer(house)
+        return Response(serializer.data) 
+
+    def put(self, request, pk, format=None):
+        '''
+        update details of a single house object
+        '''
+
+        house=self.get_object(pk)
+        serializer = HouseSerializer(house, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        house = self.get_object(pk)
+        house.delete()
+
 
 
 

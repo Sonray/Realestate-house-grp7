@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from PIL import Image
@@ -56,9 +57,31 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
 
 
+=======
+from authentication.models import User
+from cloudinary.models import CloudinaryField
+>>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
 
 
 # Create your models here.
+
+
+class House(models.Model):
+    image=CloudinaryField("photos", blank=True, null=True)
+    description=models.TextField()
+    price=models.CharField(max_length=300)
+    category=models.CharField(max_length=300)
+    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="houses")
+    location=models.CharField(max_length=300)
+    date_added = models.DateTimeField(auto_now_add = True, null =True)
+
+    def save_house(self):
+        self.save()
+
+    def delete_house(self):
+        self.delete()
+
+
 class Review(models.Model):
     # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
     review_comment = models.TextField()
