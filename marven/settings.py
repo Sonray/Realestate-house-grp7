@@ -103,6 +103,22 @@ else:
    }
 
 
+
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'authentication.backend.JWTAuthentication',
+    ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
