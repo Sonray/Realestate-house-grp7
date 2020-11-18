@@ -200,4 +200,11 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# cloudinary.config (
+#     cloud_name = config('CLOUD_NAME'),
+#     api_key = config('CLOUD_API_KEY'),
+#     api_secret = config('CLOUD_API_SECRET'),
+# )
+
 # Configure Django App for Heroku.

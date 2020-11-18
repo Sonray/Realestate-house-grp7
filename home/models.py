@@ -24,7 +24,7 @@ class House(models.Model):
 
 class Review(models.Model):
     # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
-    Review_comment = models.TextField()
+    review_comment = models.TextField()
     user_id = models.ForeignKey(User,on_delete = models.CASCADE)
     
     def delete_review(self):
