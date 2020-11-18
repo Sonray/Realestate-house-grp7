@@ -1,10 +1,7 @@
 from django.test import TestCase
-<<<<<<< HEAD
 from .models import *
-=======
 from .models import House
 from django.contrib.auth import get_user_model
->>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
 
 class TestProfile(TestCase):
     def setUp(self):

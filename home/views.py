@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from .serializer import ProfileSerializer, RevSerializer
 from .models import UserProfile, Review 
 from rest_framework.response import Response
@@ -7,6 +6,16 @@ from rest_framework import status
 from django.http import Http404,HttpResponse
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from .serializer import RevSerializer
+from django.shortcuts import render
+from .serializer import HouseSerializer,RevSerializer
+from .models import House,Review
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status,permissions
+from django.http import Http404
+from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
+
 
 # Profile views
 class UserProfileList(APIView):
@@ -14,20 +23,6 @@ class UserProfileList(APIView):
         all_profile = UserProfile.objects.all()
         serializers=ProfileSerializer(all_profile, many=True)
         return Response(serializers.data)
-
-
-
-from .serializer import RevSerializer
-=======
-from django.shortcuts import render
-from .serializer import HouseSerializer,RevSerializer
-from .models import House,Review
->>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status,permissions
-from django.http import Http404
-from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
 
 
 

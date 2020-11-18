@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from PIL import Image
@@ -57,10 +56,8 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
 
 
-=======
 from authentication.models import User
 from cloudinary.models import CloudinaryField
->>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
 
 
 # Create your models here.

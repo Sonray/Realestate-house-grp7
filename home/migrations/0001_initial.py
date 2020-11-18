@@ -22,7 +22,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-<<<<<<< HEAD
             name='UserProfile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -38,7 +37,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('Review_comment', models.TextField()),
                 ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-=======
             name='House',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -49,7 +47,6 @@ class Migration(migrations.Migration):
                 ('location', models.CharField(max_length=300)),
                 ('date_added', models.DateTimeField(auto_now_add=True, null=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='houses', to=settings.AUTH_USER_MODEL)),
->>>>>>> 4c8ec86a9220764b7c20140ce80790886728b7e8
             ],
         ),
     ]
