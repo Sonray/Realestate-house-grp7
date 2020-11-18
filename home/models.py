@@ -19,3 +19,20 @@ class Inquiry(models.Model):
     @receiver(post_save, sender=User)
     def save_user_inquiry(sender, instance, **kwargs):
         instance.Profile.save()
+
+
+# Create your models here.
+class Review(models.Model):
+    # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    review_comment = models.TextField()
+    user_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    
+    def delete_review(self):
+        self.delete()
+
+    def save_review(self):
+        self.save()
+    
+    def __str__(self):
+        return self.review
+

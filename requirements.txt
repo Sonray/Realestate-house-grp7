@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 alembic==1.4.3
 appdirs==1.4.4
 backports.functools-lru-cache==1.6.1
@@ -58,3 +59,15 @@ visitor==0.1.3
 Werkzeug==1.0.1
 WTForms==2.3.3
 zipp==1.2.0
+=======
+asgiref==3.3.1
+dj-database-url==0.5.0
+Django==3.0.5
+djangorestframework==3.12.2
+gunicorn==20.0.4
+psycopg2-binary==2.8.6
+python-decouple==3.3
+pytz==2020.4
+sqlparse==0.4.1
+whitenoise==5.2.0
+>>>>>>> 78bb3186bdc052da1ccb7eece7ba0798210ddcee
