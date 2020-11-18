@@ -8,15 +8,13 @@ class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=280)
     email = serializers.EmailField(max_length=50)
     date_joined = serializers.DateTimeField(default=timezone.now)
-    type = serializers.ChoiceField(choices = ['Realtor', 'A_User'])
+    type = serializers.ChoiceField(choices = ['REALTOR', 'USER'])
     password = serializers.CharField( max_length=280, write_only=True)
-
 
     class Meta:
         model = User
         fields = ['username', 'email', 'type', 'password' ]
-    
-    
+        
     def validate(self, attrs):
         email = attrs.get('email', '')
         if User.objects.filter(email=attrs['email']).exists():
@@ -30,7 +28,7 @@ class RegisterSerializer(serializers.Serializer):
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
-    password = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
     token = serializers.CharField(allow_blank=True, read_only=True)
 
     class Meta:

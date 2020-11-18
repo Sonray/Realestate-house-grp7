@@ -126,7 +126,11 @@ AUTH_USER_MODEL = 'authentication.User'
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+        
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'authentication.backend.JWTAuthentication',
     ],
