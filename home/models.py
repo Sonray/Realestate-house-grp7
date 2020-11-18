@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Review(models.Model):
     # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
-    Review_comment = models.TextField()
+    review_comment = models.TextField()
     user_id = models.ForeignKey(User,on_delete = models.CASCADE)
     
     def delete_review(self):
