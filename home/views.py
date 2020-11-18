@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status,permissions
 from django.http import Http404
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
 
 
 
@@ -29,7 +29,7 @@ class HouseList(APIView):
 
 class HouseDetail(APIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def get_object(self,pk):
         '''
