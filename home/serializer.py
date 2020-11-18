@@ -1,7 +1,11 @@
 from rest_framework import serializers
-from .models import Review
-from django.contrib.auth.models import User
-from rest_framework.validators import UniqueValidator
+from .models import House, Review
+
+class HouseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=House
+        fields = ('id','image','description','price','category','location','date_added','user',)
+
 
 class RevSerializer(serializers.ModelSerializer):
     class Meta:
