@@ -6,6 +6,10 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 
+    url(r'/register/', views.User_Register.as_view(), name='register'),
+    url(r'^api/get_user/(?P<pk>[0-9]+)/$', views.User_Register.as_view(), name='get_user'),
+    url(r'^api/update_user/(?P<pk>[0-9]+)/$', views.User_Register.as_view(), name='update_user'),
+    url(r'^api/login/', views.User_Login.as_view(), name='login'),
 
 ]
 if settings.DEBUG:
