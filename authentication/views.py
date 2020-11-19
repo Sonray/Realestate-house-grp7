@@ -10,12 +10,10 @@ from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib import auth
 import jwt
 from django.conf import settings
-from rest_framework.permissions import IsAuthenticated
-from django.conf import settings
-User = settings.AUTH_USER_MODEL
+
 # Create your views here.
 class User_Register(APIView):
-    
+        
     def get_user(self, pk):
         try:
             return User.objects.get(pk=pk)
@@ -28,21 +26,15 @@ class User_Register(APIView):
         return Response(serializers.data)
 
     def post(self, request, format=None):
-
         serializers = RegisterSerializer(data=request.data)
-
         if serializers.is_valid():
-
             serializers.save()
-
             return Response(
                 serializers.data, status=status.HTTP_201_CREATED
                 )
-
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def put(self, request, pk, format=None):
-        permission_classes = (IsAdminOrReadOnly,)
+    def put(self, request, pk, format=None):        
         merch = self.get_user(pk)
         serializers = RegisterSerializer(merch, request.data)
         if serializers.is_valid():
@@ -51,8 +43,7 @@ class User_Register(APIView):
         else:
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        permission_classes = (IsAdminOrReadOnly,)
+    def delete(self, request, pk, format=None):        
         merch = self.get_user(pk)
         merch.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
