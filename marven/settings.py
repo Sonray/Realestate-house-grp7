@@ -116,7 +116,7 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
-CORS_ALLOWED_ORIGINS = ['*']
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
