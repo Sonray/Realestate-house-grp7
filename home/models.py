@@ -8,7 +8,10 @@ from cloudinary.models import CloudinaryField
 
 class House(models.Model):
     image=CloudinaryField("photos", blank=True, null=True)
+    name=models.CharField(max_length=400, null=True)
     description=models.TextField()
+    bath=models.IntegerField(max_length=30, null=True, blank=True)
+    bed=models.IntegerField(max_length=30, null=True, blank=True)
     price=models.CharField(max_length=300)
     category=models.CharField(max_length=300)
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="houses")
@@ -23,9 +26,9 @@ class House(models.Model):
 
 
 class Review(models.Model):
-    # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
-    review_comment = models.TextField()
-    user_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    house = models.ForeignKey(House,on_delete = models.CASCADE,null=True, related_name="reviews")
+    comment = models.TextField()
+    user = models.ForeignKey(User,on_delete = models.CASCADE, null=True, related_name="users")
     
     def delete_review(self):
         self.delete()
@@ -34,5 +37,5 @@ class Review(models.Model):
         self.save()
     
     def __str__(self):
-        return self.review
+        return self.comment
 
