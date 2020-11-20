@@ -1,8 +1,4 @@
-<<<<<<< HEAD:virtual/bin/chardetect
 #!/home/moringa/Desktop/moringa-school-projects/Realestate-house-grp7/virtual/bin/python3
-=======
-#!/home/moringa/Desktop/b/Realestate-house-grp7/virtual/bin/python
->>>>>>> e132cb9963ba1e15e0e09c6d772ad9829d316c1e:virtual/bin/wheel
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -10,14 +10,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD
 setenv VIRTUAL_ENV "/home/moringa/Desktop/moringa-school-projects/Realestate-house-grp7/virtual"
-=======
-setenv VIRTUAL_ENV '/home/moringa/Desktop/b/Realestate-house-grp7/virtual'
-
-set _OLD_VIRTUAL_PATH="$PATH:q"
-setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"
->>>>>>> e132cb9963ba1e15e0e09c6d772ad9829d316c1e
 
 
 
