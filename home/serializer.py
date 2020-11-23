@@ -6,5 +6,5 @@ from rest_framework.validators import UniqueValidator
 class RevSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__'
-
+        fields = [ 'Review_comment']
+ 
