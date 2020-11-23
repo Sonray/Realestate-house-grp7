@@ -3,7 +3,7 @@ from .models import User
 from rest_framework.validators import UniqueValidator
 from django.utils import timezone
 
-class RegisterSerializer(serializers.Serializer):
+class RegisterSerializer(serializers.ModelSerializer):
     
     username = serializers.CharField(max_length=280)
     email = serializers.EmailField(max_length=50)
@@ -13,7 +13,7 @@ class RegisterSerializer(serializers.Serializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'type', 'password' ]
+        fields = ['username', 'email', 'type', 'password','date_joined' ]
         
     def validate(self, attrs):
         email = attrs.get('email', '')
@@ -25,6 +25,9 @@ class RegisterSerializer(serializers.Serializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+    def __str__(self):
+        return User
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)

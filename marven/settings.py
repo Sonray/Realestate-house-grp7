@@ -31,8 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'authentication.User'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,12 +43,11 @@ INSTALLED_APPS = [
     'home',
     'authentication',
     'rest_framework',
-    'rest_framework.authtoken',
     'corsheaders',
 ]
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -110,17 +107,31 @@ else:
 
 
 
+# JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         'authentication.backend.JWTAuthentication',
+#     ],
+#     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+# }
+
+
+AUTH_USER_MODEL = 'authentication.User'
+
+
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'authentication.backend.JWTAuthentication',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
