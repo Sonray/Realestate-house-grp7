@@ -7,12 +7,14 @@ from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.core.mail import send_mail
 from django.db.models import CharField
+from django.conf import settings
+
 
 
 #Profile
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name='userprofile', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='userprofile', on_delete=models.CASCADE)
     profile_id = models.IntegerField(default=0)
     image = models.ImageField(upload_to = 'images/', default="")
     bio = models.TextField(max_length=500, default="My Bio", blank=True)
@@ -30,11 +32,11 @@ class UserProfile(models.Model):
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
-    @receiver(post_save, sender=User)
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user=instance)
-    @receiver(post_save, sender=User)
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def save_user_profile(sender, instance, **kwargs):
         instance.userprofile.save()
 
@@ -56,7 +58,9 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
 
 
-from authentication.models import User
+# 
+
+
 from cloudinary.models import CloudinaryField
 
 
@@ -68,7 +72,7 @@ class House(models.Model):
     description=models.TextField()
     price=models.CharField(max_length=300)
     category=models.CharField(max_length=300)
-    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="houses")
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="houses")
     location=models.CharField(max_length=300)
     date_added = models.DateTimeField(auto_now_add = True, null =True)
 
@@ -82,7 +86,7 @@ class House(models.Model):
 class Review(models.Model):
     # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
     review_comment = models.TextField()
-    user_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
     
     def delete_review(self):
         self.delete()

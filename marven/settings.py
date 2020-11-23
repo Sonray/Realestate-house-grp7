@@ -18,11 +18,13 @@ from decouple import config,Csv
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+import django_heroku
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
+
+
 # development
 if config('MODE')=="dev":
    DATABASES = {
@@ -77,9 +79,11 @@ INSTALLED_APPS = [
     'cloudinary',
     'bootstrap3',
     'home',
-    'authentication',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_rest_passwordreset'
+   
+
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -161,7 +165,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'authentication.User'
+ 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
