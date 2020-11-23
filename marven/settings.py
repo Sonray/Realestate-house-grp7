@@ -49,11 +49,11 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -80,7 +80,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marven.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000',
+]
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -109,22 +113,13 @@ else:
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'authentication.backend.JWTAuthentication',
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
 
 
 # Password validation
@@ -174,7 +169,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # configuring the location for media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
