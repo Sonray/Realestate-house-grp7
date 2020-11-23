@@ -57,7 +57,11 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< HEAD
+set -gx VIRTUAL_ENV "/home/moringa/Desktop/moringa-school-projects/Realestate-house-grp7/virtual"
+=======
 set -gx VIRTUAL_ENV '/home/moringa/Desktop/b/Realestate-house-grp7/virtual'
+>>>>>>> e132cb9963ba1e15e0e09c6d772ad9829d316c1e
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | head -c 1) -lt 3
