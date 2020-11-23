@@ -20,16 +20,16 @@ from rest_framework import permissions
 @permission_classes((permissions.AllowAny,))
 class User_Register(APIView ):
 
-    # def get_user(self, pk):
-    #     try:
-    #         return User.objects.get(pk=pk)
-    #     except Post.DoesNotExist:
-    #         return Http404
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return Http404
 
-    # def get(self,request, pk, format=None):
-    #     the_user = self.get_user(pk)
-    #     serializers = RegisterSerializer(the_user)
-    #     return Response(serializers.data)
+    def get(self,request, pk, format=None):
+        the_user = self.get_user(pk)
+        serializers = RegisterSerializer(the_user)
+        return Response(serializers.data)
 
     def post(self, request, format=None):
         serializers = RegisterSerializer(data=request.data)
@@ -40,30 +40,43 @@ class User_Register(APIView ):
                 )
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    # def put(self, request, pk, format=None):
-    #     permission_classes = (IsAdminOrReadOnly,)
-    #     merch = self.get_user(pk)
-    #     serializers = RegisterSerializer(merch, request.data)
-    #     if serializers.is_valid():
-    #         serializers.save()
-    #         return Response(serializers.data)
-    #     else:
-    #         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, pk, format=None):
+        permission_classes = (IsAdminOrReadOnly,)
+        merch = self.get_user(pk)
+        serializers = RegisterSerializer(merch, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def delete(self, request, pk, format=None):
-    #     permission_classes = (IsAdminOrReadOnly,)
-    #     merch = self.get_user(pk)
-    #     merch.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, pk, format=None):
+        permission_classes = (IsAdminOrReadOnly,)
+        merch = self.get_user(pk)
+        merch.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class User_Login(APIView):
-    pass
-    # permission_classes = (IsAuthenticated, )
-    # def post(self, request, *args, **kwargs):
-    #     data = request.data
-    #     serializer = LoginSerializer(data=data)
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = LoginSerializer(data=data)
 
-    #     if serializer.is_valid(raise_exception=True):
-    #         new_data = serializer.data
-    #         return Response( data, status=status.HTTP_200_OK )
-    #     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response( data, status=status.HTTP_200_OK )
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class User_logout(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
