@@ -3,7 +3,7 @@ from .serializer import HouseSerializer,RevSerializer
 from .models import House,Review
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status,permissions
+from rest_framework import status,permissions,filters
 from django.http import Http404
 from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
 
@@ -13,7 +13,6 @@ from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
 
 class HouseList(APIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request, format=None):
         all_houses = House.objects.all()
@@ -29,7 +28,6 @@ class HouseList(APIView):
 
 class HouseDetail(APIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def get_object(self,pk):
         '''
