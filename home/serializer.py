@@ -28,5 +28,5 @@ class HouseSerializer(serializers.ModelSerializer):
 class RevSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__'
-
+        fields = [ 'Review_comment']
+ 
