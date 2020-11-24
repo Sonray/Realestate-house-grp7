@@ -4,7 +4,7 @@ from .models import House, Review
 class HouseSerializer(serializers.ModelSerializer):
     class Meta:
         model=House
-        fields = ('id','image','description','price','category','location','date_added','user',)
+        fields = ('id','image','name','description','price','category','location','date_added','user','bath','bed',)
 
 
 class RevSerializer(serializers.ModelSerializer):
