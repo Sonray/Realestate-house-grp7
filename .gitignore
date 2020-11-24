@@ -87,11 +87,8 @@ venv.bak/
 /site
 # mypy
 .mypy_cache/
-<<<<<<< HEAD
 migrations/
-=======
 .mypy_cache/
 migrations/
 *.pyc
 
->>>>>>> main

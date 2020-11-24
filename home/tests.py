@@ -33,8 +33,6 @@ class HouseTestCase(TestCase):
     testcase class that runs tests for house objects
     '''
 
-<<<<<<< HEAD
-=======
     def setUp(self):
         User=get_user_model()
         self.person = User(username = "daisy", email="daisy@email.com", password = "mypassword")
@@ -67,4 +65,3 @@ class HouseTestCase(TestCase):
         self.home.delete_house()
         houses=House.objects.all()
         self.assertTrue(len(houses)==0)
->>>>>>> main

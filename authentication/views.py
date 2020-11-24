@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from rest_framework.response import Response
@@ -142,5 +141,3 @@ class ChangePassword(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-=======
->>>>>>> main

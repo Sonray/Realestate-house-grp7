@@ -4,10 +4,8 @@ from .serializers import InquirySerializer
 from .serializer import RevSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-<<<<<<< HEAD
 from rest_framework import status
 from django.http import HttpResponse
-=======
 from .permissions import IsAdminOrReadOnly
 from .models import Review
 from .serializer import ProfileSerializer, RevSerializer
@@ -17,7 +15,6 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404,HttpResponse
 from rest_framework import status
->>>>>>> main
 from .permissions import IsAdminOrReadOnly
 from .serializer import RevSerializer
 from django.shortcuts import render
@@ -28,7 +25,6 @@ from rest_framework.views import APIView
 from rest_framework import status,permissions
 from django.http import Http404
 from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
-
 
 # Profile views
 class UserProfileList(APIView):
@@ -46,12 +42,6 @@ class UserProfileList(APIView):
                 )
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-# Create your views here.
-
-<<<<<<< HEAD
-=======
 class HouseList(APIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -107,9 +97,6 @@ class HouseDetail(APIView):
         house = self.get_object(pk)
         house.delete()
 
-
-
-
 class InquiryViewSet(viewsets.ModelViewSet):
     queryset = Inquiry.objects.all()
     serializer_class = InquirySerializer
@@ -135,6 +122,7 @@ class InquiryViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class RevList(APIView):
 
     def get(self, request, format=None):
@@ -148,73 +136,3 @@ class RevList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        
-
-
-    # def delete(self, request, pk, format=None):
-    #     Review = self.get_user(pk)
-    #     review.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Review (APIView):
-    
-#     def get_user(self, pk):
-#         try:
-#             return  Review.objects.get(pk=pk)
-#         except Review.DoesNotExist:
-#             return Http404
-
-#     permission_classes = (IsAdminOrReadOnly,)
-        
-#     def get(self,request, pk, format=None):
-#         the_user = self.get_user(pk)
-#         serializers =  ReviewSerializer(the_user)
-#         return Response(serializers.data) 
-
-#     def post(self, request, format=None):
-#         serializers = ReviewSerializer(data=request.data)
-
-#         if serializers.is_valid():
-
-#             serializers.save()
-
-#             return Response(serializers.data, status=status.HTTP_201_CREATED)
-
-#         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-#     def delete(self, request, pk, format=None):
-#         Review = self.get_user(pk)
-#         review.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
->>>>>>> main

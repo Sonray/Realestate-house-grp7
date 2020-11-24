@@ -62,8 +62,6 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     )
 
 # Create your models here.
-<<<<<<< HEAD
-=======
 class House(models.Model):
     image=CloudinaryField("photos", blank=True, null=True)
     description=models.TextField()
@@ -89,6 +87,5 @@ class Review(models.Model):
    
     def delete_review(self):
         self.delete()
->>>>>>> main
 
 

@@ -72,22 +72,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
+    'django.contrib.staticfiles',    
     'cloudinary_storage',
     'cloudinary',
     'bootstrap3',
     'home',
     'rest_framework',
-<<<<<<< HEAD
     'corsheaders',
     'django_rest_passwordreset',
-=======
     'rest_framework.authtoken',
     'django_rest_passwordreset'
    
 
->>>>>>> main
 ]
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -129,26 +125,6 @@ CORS_ORIGIN_WHITELIST = [
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# development
-# if config('MODE')=="prod":
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': config('DB_NAME'),
-#            'USER': config('DB_USER'),
-#            'PASSWORD': config('DB_PASSWORD'),
-#            'HOST': config('DB_HOST'),
-#            'PORT': '',
-#        }
-#    }
-# # production
-# else:
-#    DATABASES = {
-#        'default': dj_database_url.config(
-#            default=config('DATABASE_URL')
-#        )
-#    }
-
 cloudinary.config (
     cloud_name = config('CLOUD_NAME'),
     api_key = config('CLOUD_API_KEY'),
@@ -163,16 +139,7 @@ EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
 
-# JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#         'authentication.backend.JWTAuthentication',
-#     ],
-#     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
-# }
-
+# JWT_SECRET_KEY =
 
 AUTH_USER_MODEL = 'authentication.User'
 
@@ -253,9 +220,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Configure Django App for Heroku.
-<<<<<<< HEAD
 django_heroku.settings(locals())
-=======
-django_heroku.settings(locals())
-
->>>>>>> main
