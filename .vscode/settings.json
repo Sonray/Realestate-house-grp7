@@ -1,0 +1,6 @@
+{
+    "cSpell.ignoreWords": [
+        "datetime"
+    ],
+    "python.pythonPath": "virtual/bin/python"
+}
