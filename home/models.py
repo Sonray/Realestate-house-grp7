@@ -1,17 +1,16 @@
 from django.db import models
 from authentication.models import User
-from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
 
 
 class House(models.Model):
-    image=CloudinaryField("photos", blank=True, null=True)
+    image=models.ImageField(upload_to="photos/", blank=True, null=True)
     name=models.CharField(max_length=400, null=True)
     description=models.TextField()
-    bath=models.IntegerField(max_length=30, null=True, blank=True)
-    bed=models.IntegerField(max_length=30, null=True, blank=True)
+    bath=models.IntegerField(blank=True, null=True)
+    bed=models.IntegerField(blank=True, null=True)
     price=models.CharField(max_length=300)
     category=models.CharField(max_length=300)
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="houses")
