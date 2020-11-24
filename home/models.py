@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from PIL import Image
 from django.dispatch import receiver
 from django.urls import reverse
@@ -8,8 +9,14 @@ from django_rest_passwordreset.signals import reset_password_token_created
 from django.core.mail import send_mail
 from django.db.models import CharField
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
-
+class Inquiry(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='inquire')
+    name = models.CharField(blank=True, max_length=120)
+    location = models.CharField(max_length=60, blank=True)
+    contact = models.EmailField(max_length=100, blank=True)
+    message = models.TextField(max_length=255, blank=True)
 
 #Profile
 
@@ -54,19 +61,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         [reset_password_token.user.email]
     )
 
-
-
-
-
-# 
-
-
-from cloudinary.models import CloudinaryField
-
-
 # Create your models here.
-
-
 class House(models.Model):
     image=CloudinaryField("photos", blank=True, null=True)
     description=models.TextField()

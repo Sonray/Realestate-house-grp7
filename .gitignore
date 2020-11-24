@@ -8,6 +8,8 @@ __pycache__/
 *.so
 # Distribution / packaging
 .Python
+migrations
+.env
 build/
 develop-eggs/
 dist/

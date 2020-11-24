@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-# import django_heroku
+import django_heroku
 import dj_database_url
 from decouple import config,Csv
 import cloudinary
@@ -165,6 +165,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
  
 
 # Internationalization
@@ -203,13 +209,6 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # configuring the location for media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# cloudinary.config (
-#     cloud_name = config('CLOUD_NAME'),
-#     api_key = config('CLOUD_API_KEY'),
-#     api_secret = config('CLOUD_API_SECRET'),
-# )
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
