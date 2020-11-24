@@ -10,15 +10,15 @@ class Inquiry(models.Model):
     location = models.CharField(max_length=60, blank=True)
     contact = models.EmailField(max_length=100, blank=True)
     message = models.TextField(max_length=255, blank=True)
-    def __str__(self):
-        return f'{self.user.username} inquire'
-    @receiver(post_save, sender=User)
-    def create_user_inquiry(sender, instance, created, **kwargs):
-        if created:
-            Inquiry.objects.create(user=instance)
-    @receiver(post_save, sender=User)
-    def save_user_inquiry(sender, instance, **kwargs):
-        instance.Profile.save()
+    # def __str__(self):
+    #     return f'{self.user.username} inquire'
+    # @receiver(post_save, sender=User)
+    # def create_user_inquiry(sender, instance, created, **kwargs):
+    #     if created:
+    #         Inquiry.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def save_user_inquiry(sender, instance, **kwargs):
+    #     instance.Profile.save()
 
 
 # Create your models here.
