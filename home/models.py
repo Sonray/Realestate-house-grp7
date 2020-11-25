@@ -1,9 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image
-from django.dispatch import receiver
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.core.mail import send_mail
@@ -12,7 +10,7 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 
 class Inquiry(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='inquire')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='inquire')
     name = models.CharField(blank=True, max_length=120)
     location = models.CharField(max_length=60, blank=True)
     contact = models.EmailField(max_length=100, blank=True)
@@ -80,9 +78,9 @@ class House(models.Model):
 
 class Review(models.Model):
     Review_comment = models.TextField(max_length=255, blank=True)
-    # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    House_ids = models.ForeignKey(House,on_delete = models.CASCADE, related_name="house_review")
     review_comment = models.TextField()
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE, related_name="review")
     
    
     def delete_review(self):

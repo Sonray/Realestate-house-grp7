@@ -1,29 +1,13 @@
-from rest_framework import viewsets,status
-from .models import Inquiry
+from rest_framework import viewsets,status,permissions
+from .models import Inquiry, UserProfile, Review, House
 from .serializers import InquirySerializer
-from .serializer import RevSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
-from django.http import HttpResponse
 from .permissions import IsAdminOrReadOnly
-from .models import Review
-from .serializer import ProfileSerializer, RevSerializer
-from .models import UserProfile, Review 
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from .serializer import ProfileSerializer, RevSerializer, HouseSerializer
 from rest_framework import status
 from django.http import Http404,HttpResponse
-from rest_framework import status
-from .permissions import IsAdminOrReadOnly
-from .serializer import RevSerializer
 from django.shortcuts import render
-from .serializer import HouseSerializer,RevSerializer
-from .models import House,Review
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status,permissions
-from django.http import Http404
 from .permissions import IsAdminOrReadOnly,IsOwnerOrReadOnly
 
 # Profile views

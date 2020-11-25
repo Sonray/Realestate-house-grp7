@@ -72,17 +72,17 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
+    'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
     'bootstrap3',
-    'home',
     'rest_framework',
     'corsheaders',
     'django_rest_passwordreset',
-    'rest_framework.authtoken',
-    'django_rest_passwordreset'
-   
+    'rest_framework.authtoken', 
+    # 'django_rest_passwordreset',
+    'home',
+    'authentication',
 
 ]
 MIDDLEWARE = [
@@ -141,8 +141,9 @@ EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
 
 # JWT_SECRET_KEY =
 
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = "authentication.User"
 
+# SOCIAL_AUTH_USER_MODEL = 'authentication.User'
 
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 REST_FRAMEWORK = {
@@ -153,6 +154,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     
 }
 
@@ -174,13 +178,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
-}
- 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -195,11 +192,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    )
-}
 
 
 # Static files (CSS, JavaScript, Images)

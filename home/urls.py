@@ -16,9 +16,9 @@ from rest_framework.authtoken.views import obtain_auth_token
 router = routers.DefaultRouter()
 router.register(r'inquiry', views.InquiryViewSet)
 urlpatterns = [
-    path(r'^viewset/',include(router.urls)),
+    url(r'^viewset/',include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path(r'^api/review/$', views.RevList.as_view()),
+    url(r'^api/review/$', views.RevList.as_view()),
     path('api/profile/', views.UserProfileList.as_view()),
     path('api/review/', views.RevList.as_view()),       
     path('api/houses/', views.HouseList.as_view()),
