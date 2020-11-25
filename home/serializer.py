@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Review
-from django.contrib.auth.models import User
+from authentication.models import User
 from rest_framework.validators import UniqueValidator
 from .models import UserProfile
 from .models import House, Review

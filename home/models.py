@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image
-from django.dispatch import receiver
+from authentication.models import User
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.core.mail import send_mail
@@ -12,7 +11,7 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 
 class Inquiry(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='inquire')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='inquire')
     name = models.CharField(blank=True, max_length=120)
     location = models.CharField(max_length=60, blank=True)
     contact = models.EmailField(max_length=100, blank=True)
@@ -22,8 +21,7 @@ class Inquiry(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='userprofile', on_delete=models.CASCADE)
-    profile_id = models.IntegerField(default=0)
-    image = models.ImageField(upload_to = 'images/', default="")
+    image = models.ImageField(upload_to='photos/', blank=True, null=True)
     bio = models.TextField(max_length=500, default="My Bio", blank=True)
     name = models.CharField(blank=True, max_length=120)
     location = models.CharField(max_length=60, blank=True)
@@ -39,13 +37,15 @@ class UserProfile(models.Model):
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
+        
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user=instance)
-    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.userprofile.save()
+
+    # @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.save()
 
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
@@ -63,8 +63,11 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
 # Create your models here.
 class House(models.Model):
-    image=CloudinaryField("photos", blank=True, null=True)
+    image = models.ImageField(upload_to='photos/', blank=True, null=True)
+    name=models.CharField(max_length=400, null=True)
     description=models.TextField()
+    bath=models.IntegerField(blank=True, null=True)
+    bed=models.IntegerField(blank=True, null=True)
     price=models.CharField(max_length=300)
     category=models.CharField(max_length=300)
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="houses")
@@ -80,17 +83,12 @@ class House(models.Model):
 
 class Review(models.Model):
     Review_comment = models.TextField(max_length=255, blank=True)
-    # House_id = models.ForeignKey(User,on_delete = models.CASCADE)
+    House_ids = models.ForeignKey(House,on_delete = models.CASCADE, related_name="house_review")
     review_comment = models.TextField()
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE, related_name="review")
     
    
     def delete_review(self):
         self.delete()
 
-    def save_review(self):
-        self.save()
-    
-    def __str__(self):
-        return self.review
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Inquiry
-from django.contrib.auth.models import User
+from authentication.models import User
 
 class InquirySerializer(serializers.ModelSerializer):
     class Meta:
